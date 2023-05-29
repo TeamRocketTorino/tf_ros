@@ -36,3 +36,19 @@ class RocketData:
         self.pressure = float(array[10])
         self.altitude = float(array[11])
         self.temperature = float(array[12])
+
+        return self
+
+    def from_string(self, str):
+        if(len(str) == 0):
+            return None
+        
+        str = str.strip()
+        values = str.split(",")
+
+        if(len(values) <= 13):
+            return None
+        
+        values = values[:13]
+
+        return self.from_array(values)

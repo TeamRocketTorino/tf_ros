@@ -29,18 +29,10 @@ class FramePublisher(Node):
 
 
     def handle_serial_line(self, line):
-        if(len(line) == 0 or not isinstance(line[0], int)):
-            return
+        rd = RocketData().from_string(line.decode())
 
-        line_str = str(line).strip()[2:]
-        values = line_str.split(",")
-
-        if(len(values) != 14):
+        if rd==None:
             return
-        
-        values = values[:13]
-        rd = RocketData()
-        rd.from_array(values)
 
         t = TransformStamped()
 
