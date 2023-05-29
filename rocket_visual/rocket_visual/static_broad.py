@@ -16,8 +16,11 @@ class StaticFramePublisher(Node):
         self.tf_static_broadcaster = StaticTransformBroadcaster(self)
 
         # Publish static transforms once at startup
-        self.msg = rclpy.wait_for_message('flight_data',TransformStamped)
-        self.make_transforms(self.msg)
+        self.subscription = self.create_subscription(
+            TransformStamped,
+            'flight_data',
+            self.make_transforms,
+            1)
 
     def make_transforms(self, msg):
         t = TransformStamped()
@@ -37,6 +40,7 @@ class StaticFramePublisher(Node):
 
         self.tf_static_broadcaster.sendTransform(t)
 
+        raise SystemExit  
 
 def main():
     logger = rclpy.logging.get_logger('logger')
@@ -46,6 +50,8 @@ def main():
     node = StaticFramePublisher(sys.argv)
     try:
         rclpy.spin(node)
+    except SystemExit:                 # <--- process the exception 
+        rclpy.logging.get_logger("Quitting").info('Done')
     except KeyboardInterrupt:
         pass
 

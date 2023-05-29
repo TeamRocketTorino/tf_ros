@@ -5,8 +5,6 @@ from rclpy.node import Node
 
 from tf2_ros import TransformBroadcaster
 
-from turtlesim.msg import Pose
-
 class FramePublisher(Node):
 
     def __init__(self):
