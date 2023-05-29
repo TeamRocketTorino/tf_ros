@@ -6,6 +6,7 @@ from rclpy.node import Node
 from tf2_ros import TransformBroadcaster
 
 import serial
+import math
 
 from rocket_visual.rocketdata import RocketData
 
@@ -31,7 +32,7 @@ class FramePublisher(Node):
     def handle_serial_line(self, line):
         rd = RocketData().from_string(line.decode())
 
-        if rd==None:
+        if rd==None or math.isnan(rd.q0):
             return
 
         t = TransformStamped()

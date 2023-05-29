@@ -18,6 +18,13 @@ class RocketData:
     pressure: float = 0.0
     altitude: float = 0.0
 
+    def compute_q0(self):
+        partial = 1.0 - (self.q1**2 + self.q2**2 + self.q3**2)
+        if partial < 0:
+            self.q0 = math.nan
+        else:
+            self.q0 = math.sqrt(partial)
+
     def from_array(self, array):
         self.timestamp = int(array[0])
 
@@ -31,7 +38,7 @@ class RocketData:
         self.q1 = float(array[7])
         self.q2 = float(array[8])
         self.q3 = float(array[9])
-        self.q0 = math.sqrt(1.0 - (self.q1**2 + self.q2**2 + self.q3**2))
+        self.compute_q0()
 
         self.pressure = float(array[10])
         self.altitude = float(array[11])
