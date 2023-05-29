@@ -4,13 +4,14 @@ from rclpy.node import Node
 from tf2_ros import TransformBroadcaster
 
 import serial
+import sys
 
 from rocket_visual.rocketdata import RocketData
 
 
 class FramePublisher(Node):
 
-    def __init__(self):
+    def __init__(self, port, baudrate):
         super().__init__('broad_serial')
 
         # Declare and acquire `rocket_name` parameter
@@ -20,7 +21,7 @@ class FramePublisher(Node):
         # Initialize the transform broadcaster
         self.tf_broadcaster = TransformBroadcaster(self)
 
-        with serial.Serial('/dev/ttyACM0', 115200, timeout=1) as ser:
+        with serial.Serial(port, baudrate, timeout=1) as ser:
             while(True):
                 line = ser.readline()   # read a '\n' terminated line
                 self.handle_serial_line(line)
@@ -42,8 +43,11 @@ class FramePublisher(Node):
 
 
 def main():
+    port = sys.argv[1] or '/dev/ttyACM0'
+    baudrate = int(sys.argv[2]) or 115200
+
     rclpy.init()
-    node = FramePublisher()
+    node = FramePublisher(port, baudrate)
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
