@@ -14,7 +14,7 @@ from rocket_visual.rocketdata import RocketData
 class FramePublisher(Node):
 
     def __init__(self):
-        super().__init__('broad')
+        super().__init__('broad_serial')
 
         # Declare and acquire `rocket_name` parameter
         self.rocketname = self.declare_parameter(
