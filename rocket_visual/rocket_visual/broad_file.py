@@ -21,10 +21,18 @@ class FramePublisher(Node):
 
         filename = self.declare_parameter("file", "").get_parameter_value().string_value
 
-        file = open(filename, 'r')
-        for line in file:
-            self.handle_file_line(line)
+        frequency = 111.0
+        self.timer = self.create_timer(1.0/frequency, self.timer_callback) # same frequency as real sensor
+        
+        self.file = open(filename, 'r')
 
+    def timer_callback(self):
+        line = self.file.readline()
+
+        if not line:
+            self.timer.cancel()
+            
+        self.handle_file_line(line)
 
     def handle_file_line(self, line):
         rd = RocketData().from_string(line)
