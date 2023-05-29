@@ -30,7 +30,7 @@ class FramePublisher(Node):
         line = self.file.readline()
 
         if not line:
-            self.timer.cancel()
+            raise SystemExit
             
         self.handle_file_line(line)
 
@@ -55,6 +55,8 @@ def main():
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
+        pass
+    except SystemExit:
         pass
 
     rclpy.shutdown()
