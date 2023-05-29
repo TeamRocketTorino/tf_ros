@@ -6,7 +6,7 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='rocket_visual',
-            executable='broad',
+            executable='broad_serial',
             name='rocket_broadcaster',
             parameters=[
                 {'rocket_frame': 'rocket1'}
