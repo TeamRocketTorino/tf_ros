@@ -1,5 +1,6 @@
 import math
 from dataclasses import dataclass
+from geometry_msgs.msg import TransformStamped
 
 @dataclass
 class RocketData:
@@ -59,3 +60,27 @@ class RocketData:
         values = values[:13]
 
         return self.from_array(values)
+    
+    def to_tf2(self, header_frame_id, child_frame_id):
+        if math.isnan(self.q0):
+            return None
+
+        t = TransformStamped()
+
+        # Read message content and assign it to
+        # corresponding tf variables
+        t.header.stamp.sec = int(self.timestamp/1000000)
+        t.header.stamp.nanosec = int(self.timestamp%1000000)*1000
+        t.header.frame_id = header_frame_id
+        t.child_frame_id = child_frame_id
+
+        t.transform.translation.x = 0.0
+        t.transform.translation.y = 0.0
+        t.transform.translation.z = self.altitude
+
+        t.transform.rotation.x = self.q0
+        t.transform.rotation.y = self.q1
+        t.transform.rotation.z = self.q2
+        t.transform.rotation.w = self.q3
+
+        return t
