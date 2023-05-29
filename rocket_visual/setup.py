@@ -25,7 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
             'static_broad = rocket_visual.static_broad:main',
-            'broad_serial = rocket_visual.broad_serial:main'
+            'broad_serial = rocket_visual.broad_serial:main',
+            'broad_file = rocket_visual.broad_file:main'
         ],
     },
 )
