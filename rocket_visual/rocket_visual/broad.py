@@ -7,7 +7,7 @@ from tf2_ros import TransformBroadcaster
 
 import serial
 
-from rocket_visual.rocketdata import RocketData, rocketdata_from_array
+from rocket_visual.rocketdata import RocketData
 
 
 class FramePublisher(Node):
@@ -39,7 +39,8 @@ class FramePublisher(Node):
             return
         
         values = values[:13]
-        rd = rocketdata_from_array(values)
+        rd = RocketData()
+        rd.from_array(values)
 
         t = TransformStamped()
 
