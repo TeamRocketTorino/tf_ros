@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot name = 'sputnik'>
+
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <link name = 'body'>
+        <visual>
+            <geometry>
+                <cylinder lenght ='0.3' radius='0.0175'/>
+            </geometry>
+            <material name='white'/> 
+        </visual>
+    </link>
+
+    <link name = 'fin_1'>
+        <visual>
+            <geometry>
+                <box size='0.07 0.005 0.15'/>
+            </geometry>
+            <origin rpy='0 0 0' xyz='0.035 0 -0.14'/>
+            <material name='red'/> 
+        </visual>
+    </link>
+
+    <joint name='body_to_fin_1' type='fixed'>
+        <parent link='body'/>
+        <child link='fin_1'/>
+    </joint>
+
+    <link name = 'fin_2'>
+        <visual>
+            <geometry>
+                <box size='0.07 0.005 0.15'/>
+            </geometry>
+            <origin rpy='0 0 2.093' xyz='0.035 0 -0.14'/>
+            <material name='red'/> 
+        </visual>
+    </link>
+
+    <joint name='body_to_fin_2' type='fixed'>
+        <parent link='body'/>
+        <child link='fin_2'/>
+    </joint>
+
+    <link name = 'fin_3'>
+        <visual>
+            <geometry>
+                <box size='0.07 0.005 0.15'/>
+            </geometry>
+            <origin rpy='0 0 -2.093' xyz='0.035 0 -0.14'/>
+            <material name='red'/> 
+        </visual>
+    </link>
+
+    <joint name='body_to_fin_3' type='fixed'>
+        <parent link='body'/>
+        <child link='fin_3'/>
+    </joint>
+
+</robot>
