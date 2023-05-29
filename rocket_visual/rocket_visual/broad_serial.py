@@ -4,7 +4,6 @@ from rclpy.node import Node
 from tf2_ros import TransformBroadcaster
 
 import serial
-import math
 
 from rocket_visual.rocketdata import RocketData
 
