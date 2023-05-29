@@ -3,9 +3,6 @@ from rclpy.node import Node
 
 from tf2_ros import TransformBroadcaster
 
-import serial
-import os
-
 from rocket_visual.rocketdata import RocketData
 
 
