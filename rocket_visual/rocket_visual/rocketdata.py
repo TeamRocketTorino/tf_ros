@@ -74,9 +74,10 @@ class RocketData:
         t.header.frame_id = header_frame_id
         t.child_frame_id = child_frame_id
 
-        t.transform.translation.x = 0.0
+        t.transform.translation.x = self.altitude-262.7
         t.transform.translation.y = 0.0
-        t.transform.translation.z = self.altitude
+        t.transform.translation.z = 0.0
+        # t.transform.translation.z = 0.0
 
         t.transform.rotation.x = self.q0
         t.transform.rotation.y = self.q1

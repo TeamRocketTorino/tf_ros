@@ -19,10 +19,10 @@ def generate_launch_description():
     with open(urdf, 'r') as infp:
         robot_desc = infp.read()
 
-    rviz_config_file_name = 'rviz_basic.rviz'
-    rviz_config = os.path.join(
+    rviz_config_file_name_1 = 'altitude.rviz'
+    rviz_config_1 = os.path.join(
         pkg_path,
-        rviz_config_file_name)
+        rviz_config_file_name_1)
 
     return LaunchDescription([
         
@@ -44,13 +44,17 @@ def generate_launch_description():
         Node(
             package='rocket_visual',
             executable='static_broad',
-            name='fixed_frame'
+            name='static_broadcaster'
         ),
-        
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            arguments = ['--x', '0', '--y', '0', '--z', '0', '--yaw', '0', '--pitch', '0', '--roll', '-1.57', '--frame-id', 'fixed_frame', '--child-frame-id', 'vertical_frame']
+        ),
         Node(
             package='rviz2',
             executable='rviz2',
             name='rviz_rocket',
-            arguments = ['-d', rviz_config],
+            arguments = ['-d', rviz_config_1],
         )
     ])
