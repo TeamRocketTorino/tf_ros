@@ -19,6 +19,8 @@ class FramePublisher(Node):
 
         # Initialize the transform broadcaster
         self.tf_broadcaster = TransformBroadcaster(self)
+        self.tf_broadcaster_abs = TransformBroadcaster(self)
+
 
         frequency = 111.0
         self.timer = self.create_timer(1.0/frequency, self.timer_callback) # same frequency as real sensor
@@ -47,6 +49,11 @@ class FramePublisher(Node):
         # Send the transformation
         self.tf_broadcaster.sendTransform(t)
 
+        rd.altitude=0.0
+        t = rd.to_tf2('world', self.rocketname+"abs")
+        
+        self.tf_broadcaster_abs.sendTransform(t)
+        
 
 def main():
     logger = rclpy.logging.get_logger('logger')
