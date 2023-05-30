@@ -54,7 +54,7 @@ class RocketData:
         str = str.strip()
         values = str.split(",")
 
-        if(len(values) <= 13):
+        if(len(values) < 13):
             return None
         
         values = values[:13]
