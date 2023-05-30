@@ -16,7 +16,7 @@ class FramePublisher(Node):
 
         # Declare and acquire `rocket_name` parameter
         self.rocketname = self.declare_parameter(
-            'rocketname', 'frame').get_parameter_value().string_value
+            'rocketname', 'base_footprint').get_parameter_value().string_value
 
         # Initialize the transform broadcaster
         self.tf_broadcaster = TransformBroadcaster(self)
