@@ -76,4 +76,35 @@
         <origin rpy='0 0 -2.093' xyz='0 0 -0.12'/>
     </joint>
 
+    <link name = 'ogivec'>
+        <visual>
+            <geometry>
+                <cylinder length='0.08' radius='0.0175'/>
+            </geometry>
+            <origin rpy='0 0 0' xyz='0 0 0.04'/>
+            <material name='red'/>
+        </visual>
+    </link>
+
+    <joint name='body_to_ogivec' type='fixed'>
+        <parent link='body'/>
+        <child link='ogivec'/>
+        <origin rpy='0 0 0' xyz='0 0 0.15'/>
+    </joint>
+
+    <link name = 'ogives'>
+        <visual>
+            <geometry>
+                <sphere radius='0.0175'/>
+            </geometry>
+            <material name='red'/>
+        </visual>
+    </link>
+
+    <joint name='ogivec_to_ogives' type='fixed'>
+        <parent link='ogivec'/>
+        <child link='ogives'/>
+        <origin rpy='0 0 0' xyz='0 0 0.08'/>
+    </joint>
+
 </robot>
