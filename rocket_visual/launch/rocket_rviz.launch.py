@@ -23,17 +23,22 @@ def generate_launch_description():
     rviz_config_1 = os.path.join(
         pkg_path,
         rviz_config_file_name_1)
+    
+    rviz_config_file_name_2 = 'attitude.rviz'
+    rviz_config_2 = os.path.join(
+        pkg_path,
+        rviz_config_file_name_2)
 
     return LaunchDescription([
         
-    #    Node(
-    #        package='rocket_visual',
-    #        executable='broad_serial',
-    #        name='rocket_broadcaster',
-    #        parameters=[
-    #            {'rocket_frame': 'rocket1'}
-    #        ]
-    #    ),
+       Node(
+           package='rocket_visual',
+           executable='broad_serial',
+           name='rocket_broadcaster',
+           parameters=[
+               {'rocket_frame': 'rocket1'}
+           ]
+       ),
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
@@ -54,7 +59,13 @@ def generate_launch_description():
         Node(
             package='rviz2',
             executable='rviz2',
-            name='rviz_rocket',
+            name='rviz_altitude',
             arguments = ['-d', rviz_config_1],
+        ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz_attitude',
+            arguments = ['-d', rviz_config_2],
         )
     ])

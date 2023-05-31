@@ -24,7 +24,10 @@ class FramePublisher(Node):
         with serial.Serial(port, baudrate, timeout=1) as ser:
             while(True):
                 line = ser.readline()   # read a '\n' terminated line
-                self.handle_serial_line(line)
+                try:
+                    self.handle_serial_line(line)
+                except:
+                    pass
 
 
     def handle_serial_line(self, line):
